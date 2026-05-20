@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discord API Documentation
+    url: https://discord.com/developers/docs/
+    about: Official Discord API documentation
+  - name: MCP Documentation
+    url: https://modelcontextprotocol.io/
+    about: Model Context Protocol documentation
