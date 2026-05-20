@@ -44,7 +44,29 @@ If both `EMBY_API_KEY` and username/password are set, the API key wins.
 
 ## Run with Claude Desktop / claude.ai stdio config
 
-Add to your MCP client's config (example for Claude Desktop's `claude_desktop_config.json`):
+Two ways to wire the server into your MCP client's `claude_desktop_config.json`. Both work; pick whichever fits.
+
+**Option A — install from npm (no local build needed):**
+
+```json
+{
+  "mcpServers": {
+    "emby": {
+      "command": "npx",
+      "args": ["-y", "@mahesvara/emby-mcp-server"],
+      "env": {
+        "EMBY_SERVER_URL": "http://192.168.1.50:8096",
+        "EMBY_USERNAME": "username",
+        "EMBY_PASSWORD": "..."
+      }
+    }
+  }
+}
+```
+
+`npx -y` downloads the package on first launch and caches it; subsequent launches are fast. Update by clearing the npm cache or pinning a version (`@mahesvara/emby-mcp-server@1.2.0`).
+
+**Option B — run from a local checkout** (clone the repo and `npm install && npm run build` first):
 
 ```json
 {
@@ -54,13 +76,15 @@ Add to your MCP client's config (example for Claude Desktop's `claude_desktop_co
       "args": ["/absolute/path/to/emby-mcp-server/dist/index.js"],
       "env": {
         "EMBY_SERVER_URL": "http://192.168.1.50:8096",
-        "EMBY_USERNAME": "andrew",
+        "EMBY_USERNAME": "username",
         "EMBY_PASSWORD": "..."
       }
     }
   }
 }
 ```
+
+Use this when you're developing against the source, want a specific commit, or don't want an internet round-trip on first launch.
 
 ## Tools
 
